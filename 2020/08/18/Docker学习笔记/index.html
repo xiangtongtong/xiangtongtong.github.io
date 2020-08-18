@@ -23,14 +23,17 @@
         border-left-color: #6d6d6d;    /*左边框颜色*/
     }
   </style>
-  <meta property="og:type" content="article">
+  <meta name="description" content="第一章 Docker安装与配置1.卸载旧版本：     yum remove docker \               docker-client \               docker-client-latest \               docker-common \               docker-latest \               docker-late">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Docker学习笔记">
 <meta property="og:url" content="http://yoursite.com/2020/08/18/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="相同同">
+<meta property="og:description" content="第一章 Docker安装与配置1.卸载旧版本：     yum remove docker \               docker-client \               docker-client-latest \               docker-common \               docker-latest \               docker-late">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-18T07:36:31.000Z">
-<meta property="article:modified_time" content="2020-08-18T07:36:31.789Z">
+<meta property="article:modified_time" content="2020-08-18T09:13:55.345Z">
 <meta property="article:author" content="相同同">
+<meta property="article:tag" content="&#x2F;学习">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="相同同" type="application/atom+xml">
@@ -199,7 +202,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="第一章-Docker安装与配置"><a href="#第一章-Docker安装与配置" class="headerlink" title="第一章 Docker安装与配置"></a>第一章 Docker安装与配置</h2><pre><code>1.卸载旧版本：
+    yum remove docker \
+              docker-client \
+              docker-client-latest \
+              docker-common \
+              docker-latest \
+              docker-latest-logrotate \
+              docker-logrotate \
+              docker-engine
+2.需要的安装包：
+    yum install -y yum-utils
+3.设置镜像的仓库（这里是用的是阿里云镜像地址）：
+    yum-config-manager \
+    —add-repo \
+    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+4.安装docker相关：
+    yum install docker-ce docker-ce-cli containerd.io
+5.启动docker
+    systemctl start docker
+6.</code></pre><hr>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
+<hr>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
 
       
@@ -228,7 +253,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">/学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习//" class="article-tag-list-link color4">/学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -291,6 +338,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/08/18/asd/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          asd
+        
+      </div>
+    </a>
   
   
     <a href="/2020/07/07/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
@@ -423,6 +479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">/学习</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">/杂谈</a>
