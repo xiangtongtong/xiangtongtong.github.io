@@ -330,10 +330,27 @@
 <pre><code>7.hello-world:
     docker run hello-world安装成功
 8.查看镜像：
-    docker images</code></pre><hr>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
+    docker images
+9.配置阿里云镜像加速（每个人地址不一样）：
+    sudo mkdir -p /etc/docker
+    sudo tee /etc/docker/daemon.json &lt;&lt;-&apos;EOF&apos;
+    {
+    &quot;registry-mirrors&quot;: [&quot;https://3mqs2tqw.mirror.aliyuncs.com&quot;]
+    }
+    EOF
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker</code></pre><hr>
+<h2 id="第二章-Docker基本命令"><a href="#第二章-Docker基本命令" class="headerlink" title="第二章 Docker基本命令"></a>第二章 Docker基本命令</h2><p>这里给出官网文档地址：<a href="https://docs.docker.com/" target="_blank" rel="noopener">https://docs.docker.com/</a></p>
+<h3 id="2-1-帮助命令"><a href="#2-1-帮助命令" class="headerlink" title="2.1 帮助命令"></a>2.1 帮助命令</h3><p>docker version   显示docker版本信息<br>docker info      显示docker系统信息，包括镜像和容器数量</p>
+<h3 id="2-2-镜像命令"><a href="#2-2-镜像命令" class="headerlink" title="2.2 镜像命令"></a>2.2 镜像命令</h3><h4 id="2-2-1-docker-images-显示所有本地镜像"><a href="#2-2-1-docker-images-显示所有本地镜像" class="headerlink" title="2.2.1 docker images    显示所有本地镜像"></a>2.2.1 docker images    显示所有本地镜像</h4><p>REPOSITORY          TAG                 IMAGE ID            CREATED      SIZE<br>hello-world         latest              bf756fb1ae65        7 months ago13.3kB<br>解释：REPOSITORY  镜像的仓库源<br>     TAG         镜像的标签<br>     IMAGE ID    镜像的id<br>     CREATED     镜像的创建时间<br>     SIZE        镜像大小<br>可选项：<br>  -a, –all             列出所有镜像<br>  -q, –quiet           只显示镜像id</p>
+<h4 id="2-2-2-docker-search-搜索镜像"><a href="#2-2-2-docker-search-搜索镜像" class="headerlink" title="2.2.2 docker search    搜索镜像"></a>2.2.2 docker search    搜索镜像</h4><p>[root@iZ2ze7pphwwibnvinufi8yZ ~]# docker search mysql<br>NAME                              DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED<br>mysql                             MySQL is a widely used, open-source relation…   9869                [OK]<br>可选项，通过收藏来过滤：<br>    –filter=STARS=3000  搜索出来的镜像收藏大于3000</p>
+<h4 id="2-2-3-docker-pull-下载镜像"><a href="#2-2-3-docker-pull-下载镜像" class="headerlink" title="2.2.3 docker pull      下载镜像"></a>2.2.3 docker pull      下载镜像</h4><p>下载镜像：docker pull 镜像名[:tag] (不写tag，默认下载最新版)<br>[root@iZ2ze7pphwwibnvinufi8yZ ~]# docker pull mysql<br>Using default tag: latest<br>latest: Pulling from library/mysql<br>bf5952930446: Pull complete     分层下载，docker image的核心，联合文件系统<br>8254623a9871: Pull complete<br>938e3e06dac4: Pull complete<br>ea28ebf28884: Pull complete<br>f3cef38785c2: Pull complete<br>894f9792565a: Pull complete<br>1d8a57523420: Pull complete<br>6c676912929f: Pull complete<br>ff39fdb566b4: Pull complete<br>fff872988aba: Pull complete<br>4d34e365ae68: Pull complete<br>7886ee20621e: Pull complete<br>Digest: sha256:c358e72e100ab493a0304bda35e6f239db2ec8c9bb836d8a427ac34307d074ed 签名<br>Status: Downloaded newer image for mysql:latest<br>docker.io/library/mysql:latest    真实地址</p>
+<h4 id="2-2-4-docker-rmi-f-id-删除镜像"><a href="#2-2-4-docker-rmi-f-id-删除镜像" class="headerlink" title="2.2.4 docker rmi -f id  删除镜像"></a>2.2.4 docker rmi -f id  删除镜像</h4><p>docker rmi -f id id          删除多个镜像<br>docker rmi -f $(docker images -aq)  删除全部镜像</p>
+<h3 id="2-3-容器命令"><a href="#2-3-容器命令" class="headerlink" title="2.3 容器命令"></a>2.3 容器命令</h3><p>容器需要通过镜像才能创建，所以需要先下载镜像测试学习<br>docker pull centos<br>新建容器并启动<br>docker run [可选参数] image</p>
+<p>参数说明：<br>–name=“Name”     容器名字：tomcat01 tomcat02，用来区分容器<br>-d                后台方式运行<br>-it               使用交互方式运行，进入容器内查看内容<br>-p                指定容器的端口 -p 8080:8080<br>     -p ip：主机端口：容器端口（常用）<br>     -p 主机端口：容器端口（常用）<br>     -p 容器端口<br>-P                随机指定端口</p>
+<p>测试：启动并进入容器<br>[root@iZ2ze7pphwwibnvinufi8yZ ~]# docker run -it centos<br>[root@135c1eeee9f8 /]# ls     查看容器内的centos<br>bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var<br>列出运行的容器：<br>docker ps  当前运行的容器<br>可选参数：-a 当前运行的容器+历史运行过的容器<br>-n=？       显示最近创建的容器<br>-q          只显示容器的编号<br>退出容器<br>exit        容器停止并退出<br>Ctrl+P+Q    容器不停止退出<br>删除容器<br>docker rm 容器id                删除指定容器,不能删除正在运行的容器，强制删除rm -f<br>docker rm -f $(docker ps -aq)  删除全部容器<br>docker ps -a -q|xargs docker rm  删除所有容器<br>启动和停止容器<br>docker start 容器id      启动容器<br>docker restart 容器id    重启容器<br>docker stop 容器id       停止当前运行容器<br>docker kill 容器id       强制停止当前容器</p>
 <hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+
       
 
       
