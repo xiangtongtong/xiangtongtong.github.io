@@ -199,11 +199,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一章-可视化面板Portainer"><a href="#第一章-可视化面板Portainer" class="headerlink" title="第一章 可视化面板Portainer"></a>第一章 可视化面板Portainer</h2><p>Portainer是Docker图形化界面管理工具<br>安装命令：<br>docker run -d -p 8088:9000 –restart=always -v /var/run/docker.sock:/var/run/docker.sock –privileged=true portainer/portainer<br>安装之后，访问测试：<a href="http://123.56.24.126:8088" target="_blank" rel="noopener">http://123.56.24.126:8088</a> （个人IP地址不一样，这里是我个人的阿里云服务器）<br>进入之后界面</p>
-
-
+        <h2 id="第一章-可视化面板Portainer"><a href="#第一章-可视化面板Portainer" class="headerlink" title="第一章 可视化面板Portainer"></a>第一章 可视化面板Portainer</h2><p>Portainer是Docker图形化界面管理工具<br>安装命令：<br>docker run -d -p 8088:9000 –restart=always -v /var/run/docker.sock:/var/run/docker.sock –privileged=true portainer/portainer<br>安装之后，访问测试：<a href="http://123.56.24.126:8088" target="_blank" rel="noopener">http://123.56.24.126:8088</a> （个人IP地址不一样，这里是我个人的阿里云服务器）<img src="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/Portainer.png" class="" title="This is an image"><br>进入之后界面<img src="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/Portainer2.png" class="" title="This is an image"><br><img src="Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/Portainer2.png" alt=""></p>
 <hr>
-<h2 id="第二章-Docker镜像"><a href="#第二章-Docker镜像" class="headerlink" title="第二章 Docker镜像"></a>第二章 Docker镜像</h2><p>镜像是一种轻量级、 可执行的独立软件包,用来打包软件运行环境和基于运行环境开发的软件,它包含运行某个软件所需的所有内容,包括代码、运行时、库、环境变量和配置文件。<br>所有的应用,直接打包docker镜像,就可以直接运行。</p>
+<h2 id="第二章-Docker镜像"><a href="#第二章-Docker镜像" class="headerlink" title="第二章 Docker镜像"></a>第二章 Docker镜像</h2><h3 id="2-1-镜像是什么"><a href="#2-1-镜像是什么" class="headerlink" title="2.1 镜像是什么"></a>2.1 镜像是什么</h3><p>镜像是一种轻量级、 可执行的独立软件包,用来打包软件运行环境和基于运行环境开发的软件,它包含运行某个软件所需的所有内容,包括代码、运行时、库、环境变量和配置文件。<br>所有的应用,直接打包docker镜像,就可以直接运行。</p>
+<h3 id="2-2-Docker镜像加载原理"><a href="#2-2-Docker镜像加载原理" class="headerlink" title="2.2 Docker镜像加载原理"></a>2.2 Docker镜像加载原理</h3><p>UnionFS (联合文件系统) : Union文件系统( UnionFS )是一种分层、 轻量级并且高性能的文件系统,它支持对文件系统的修改作为-次提交来层层的叠加,同时可以将不同目录挂载到同-个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是Docker镜像的基础。镜像可以通过分层来进行继承,基于基础镜像(没有父镜像) ,可以制作各<br>种具体的应用镜像。<br>特性: 一次同时加载多个文件系统,但从外面看起来,只能看到一个文件系统,联合加载会把各层文件系统叠加起来,这样最终的文件系统会包含所有底层的文件和目录</p>
 <hr>
 
       
