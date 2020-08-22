@@ -179,6 +179,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Docker学习笔记2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">Docker学习笔记2</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/" class="archive-article-date">
+  	<time datetime="2020-08-21T08:05:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章-可视化面板Portainer"><a href="#第一章-可视化面板Portainer" class="headerlink" title="第一章 可视化面板Portainer"></a>第一章 可视化面板Portainer</h2><p>Portainer是Docker图形化界面管理工具<br>安装命令：<br>docker run -d -p 8088:9000 –restart=always -v /var/run/docker.sock:/var/run/docker.sock –privileged=true portainer/portainer<br>安装之后，访问测试：<a href="http://123.56.24.126:8088（个人IP地址不一样，这里是我个人的阿里云服务器）">http://123.56.24.126:8088（个人IP地址不一样，这里是我个人的阿里云服务器）</a></p>
+
+<p>进入之后界面：</p>
+
+
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">/学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习//" class="article-tag-list-link color4">/学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-asd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -349,6 +439,15 @@
 <h3 id="2-3-容器命令"><a href="#2-3-容器命令" class="headerlink" title="2.3 容器命令"></a>2.3 容器命令</h3><p>容器需要通过镜像才能创建，所以需要先下载镜像测试学习<br>docker pull centos<br>新建容器并启动<br>docker run [可选参数] image</p>
 <p>参数说明：<br>–name=“Name”     容器名字：tomcat01 tomcat02，用来区分容器<br>-d                后台方式运行<br>-it               使用交互方式运行，进入容器内查看内容<br>-p                指定容器的端口 -p 8080:8080<br>     -p ip：主机端口：容器端口（常用）<br>     -p 主机端口：容器端口（常用）<br>     -p 容器端口<br>-P                随机指定端口</p>
 <p>测试：启动并进入容器<br>[root@iZ2ze7pphwwibnvinufi8yZ ~]# docker run -it centos<br>[root@135c1eeee9f8 /]# ls     查看容器内的centos<br>bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var<br>列出运行的容器：<br>docker ps  当前运行的容器<br>可选参数：-a 当前运行的容器+历史运行过的容器<br>-n=？       显示最近创建的容器<br>-q          只显示容器的编号<br>退出容器<br>exit        容器停止并退出<br>Ctrl+P+Q    容器不停止退出<br>删除容器<br>docker rm 容器id                删除指定容器,不能删除正在运行的容器，强制删除rm -f<br>docker rm -f $(docker ps -aq)  删除全部容器<br>docker ps -a -q|xargs docker rm  删除所有容器<br>启动和停止容器<br>docker start 容器id      启动容器<br>docker restart 容器id    重启容器<br>docker stop 容器id       停止当前运行容器<br>docker kill 容器id       强制停止当前容器</p>
+<h3 id="2-4-常用其他命令"><a href="#2-4-常用其他命令" class="headerlink" title="2.4 常用其他命令"></a>2.4 常用其他命令</h3><h4 id="2-4-1-后台启动容器"><a href="#2-4-1-后台启动容器" class="headerlink" title="2.4.1 后台启动容器"></a>2.4.1 后台启动容器</h4><p>docker run -d 镜像名<br>docker容器使用后台运行，必须有一个前台进程，docker发现没有应用，就会自动停止</p>
+<h4 id="2-4-2-查看日志"><a href="#2-4-2-查看日志" class="headerlink" title="2.4.2 查看日志"></a>2.4.2 查看日志</h4><p>docker logs<br>显示日志：<br>-tf                   显示日志<br>–tail number         要显示的日志条数<br>docker logs -tf –tail 10 0d8619fef3f8  </p>
+<h4 id="2-4-3-查看容器中的进程信息"><a href="#2-4-3-查看容器中的进程信息" class="headerlink" title="2.4.3 查看容器中的进程信息"></a>2.4.3 查看容器中的进程信息</h4><p>docker top 容器id</p>
+<h4 id="2-4-4-查看容器的元数据"><a href="#2-4-4-查看容器的元数据" class="headerlink" title="2.4.4 查看容器的元数据"></a>2.4.4 查看容器的元数据</h4><p>docker inspect</p>
+<h4 id="2-4-5-进入当前正在运行的容器"><a href="#2-4-5-进入当前正在运行的容器" class="headerlink" title="2.4.5 进入当前正在运行的容器"></a>2.4.5 进入当前正在运行的容器</h4><p>容器通常使用后台方式运行，需要进入容器，修改配置<br>docker exec -it 容器id<br>docker attach 容器id<br>docker exec     进入容器后开启新的终端，可以操作（常用）<br>docker attach   进入容器正在执行的终端，不会启动新的终端</p>
+<h4 id="2-4-6-从容器内拷贝文件到主机上"><a href="#2-4-6-从容器内拷贝文件到主机上" class="headerlink" title="2.4.6 从容器内拷贝文件到主机上"></a>2.4.6 从容器内拷贝文件到主机上</h4><p>docker cp 容器id：容器内路径 目的主机路径<br>拷贝是手动过程，可以利用 -v 卷的技术实现自动同步</p>
+<h3 id="2-5-练习"><a href="#2-5-练习" class="headerlink" title="2.5 练习"></a>2.5 练习</h3><h4 id="2-5-1-部署nginx"><a href="#2-5-1-部署nginx" class="headerlink" title="2.5.1 部署nginx"></a>2.5.1 部署nginx</h4><p>1.搜索镜像：docker search nginx<br>2.下载镜像：docker pull nginx<br>3.启动容器： docker run -d –name nginx01 -p 3344:80 nginx<br>-d 后台运行<br>–name 容器命名<br>-p 宿主机端口：容器端口</p>
+<h4 id="2-5-2-部署tomcat"><a href="#2-5-2-部署tomcat" class="headerlink" title="2.5.2 部署tomcat"></a>2.5.2 部署tomcat</h4><p>docker run -it –rm tomcat:9.0(用完即删)<br>下载再启动<br>docker pull tomcat<br>docker run -d -p 3355:8080 –name tomcat01 tomcat<br>进入容器<br>docker exec -it tomcat01 /bin/bash<br>发现问题<br>1.linux命令缺失2.没有webapps。阿里云镜像原因：默认最小镜像，删除了部分功能，保证最小可运行环境。</p>
+<h4 id="2-5-3-部署es-kibana"><a href="#2-5-3-部署es-kibana" class="headerlink" title="2.5.3 部署es+kibana"></a>2.5.3 部署es+kibana</h4><p>启动elasticsearch<br>docker run -d –name elasticsearch -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:7.6.2<br>增加内存限制<br>docker run -d –name elasticsearch03 -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” -e ES_JAVA_OPTS=”-Xms64m -Xmx512m” elasticsearch:7.6.2</p>
 <hr>
 
       
