@@ -32,8 +32,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/Portainer.png">
 <meta property="og:image" content="http://yoursite.com/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/Portainer2.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/dockerfile01.jpg">
 <meta property="article:published_time" content="2020-08-21T08:05:07.000Z">
-<meta property="article:modified_time" content="2020-08-22T12:00:32.070Z">
+<meta property="article:modified_time" content="2020-08-26T09:13:01.805Z">
 <meta property="article:author" content="相同同">
 <meta property="article:tag" content="&#x2F;学习">
 <meta name="twitter:card" content="summary">
@@ -219,6 +220,12 @@
 <h3 id="3-3-具名挂载和匿名挂载"><a href="#3-3-具名挂载和匿名挂载" class="headerlink" title="3.3 具名挂载和匿名挂载"></a>3.3 具名挂载和匿名挂载</h3><h4 id="3-3-1-匿名挂载"><a href="#3-3-1-匿名挂载" class="headerlink" title="3.3.1 匿名挂载"></a>3.3.1 匿名挂载</h4><p>docker run -d -P –name nginx01 -v /etc/nginx nginx</p>
 <h4 id="3-3-2-具名挂载"><a href="#3-3-2-具名挂载" class="headerlink" title="3.3.2 具名挂载"></a>3.3.2 具名挂载</h4><p>docker run -d -P –name nginx02 -v juming-nginx:/etc/nginx nginx</p>
 <h4 id="3-3-3-区分"><a href="#3-3-3-区分" class="headerlink" title="3.3.3 区分"></a>3.3.3 区分</h4><p>-v 容器内路径   匿名挂载<br>-v 卷名：容器内路径   具名挂载<br>-v /宿主机路径：容器内路径   指定路径挂载<br>docker run -d -P –name nginx02 -v juming-nginx:/etc/nginx:ro nginx<br>docker run -d -P –name nginx02 -v juming-nginx:/etc/nginx:rw nginx<br>(ro,rw改变读写权限 ro readonly只读 rw readwrite可读可写)</p>
+<h4 id="3-3-4-Dockerfile"><a href="#3-3-4-Dockerfile" class="headerlink" title="3.3.4 Dockerfile"></a>3.3.4 Dockerfile</h4><p>Dockerfile是用来构建docker镜像的构建文件<br>通过脚本来生成镜像<br>创建一个dockerfile文件<br>FROM centos<br>VOLUME [“volume01”,”volume02”]<br>CMD echo “…end…”<br>CMD /bin/bash</p>
+<p>docker build -f dockerfile1 -t xtt/centos:1.0 .</p>
+<img src="/2020/08/21/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/dockerfile01.jpg" class="" title="This is an image">
+
+<p>构建镜像的时候实现挂载卷的方式比较常见</p>
+<h4 id="3-3-5-数据卷容器"><a href="#3-3-5-数据卷容器" class="headerlink" title="3.3.5 数据卷容器"></a>3.3.5 数据卷容器</h4><p>多个容器同步数据<br>docker run -it –name docker02 –volumes-from docker01 8fdf395a999e<br>docker run -it –name docker03 –volumes-from docker01 xtt/centos:1.0<br>测试删除了docker01容器，docker02和docker03依然存在，数据都挂载在本地。<br>多个mysql数据共享<br>docker run -d -p 3310:3306 -v /etc/mysql/conf.d -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 –name mysql01 mysql<br>docker run -d -p 3310:3306 -e MYSQL_ROOT_PASSWORD=123456 –name mysql02 –volume-from mysql01 mysql</p>
 <hr>
 
       
@@ -334,6 +341,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/08/22/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Docker学习笔记3
+        
+      </div>
+    </a>
   
   
     <a href="/2020/08/18/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
